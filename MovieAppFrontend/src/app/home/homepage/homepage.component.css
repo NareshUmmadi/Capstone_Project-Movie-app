@@ -1,0 +1,206 @@
+.welcome-header{
+    height: 300px;
+    background: url('../../../assets/9.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.heading-trailer{
+    position: absolute;
+    top: 0;
+}
+
+.slider-cont {
+    width: 100vw;
+    max-width: 100%;
+    overflow: auto;
+    display: inline-flex;
+    padding: 5px 20px 40px 20px;
+    height: 370px;
+}
+.tailer-cont{
+    position: relative;
+    max-width: 100%;
+    height: 300px;
+}
+.try{
+    display: inline-block;
+}
+
+.slider-cont-trailer {
+    width: 100vw;
+    max-width: 100%;
+    overflow: auto;
+    display: inline-flex;
+    height: 240px;
+    position: absolute;
+    top: 60px;
+}
+.image-cont {
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    min-width: 26vw;
+    border-radius: 5px;
+    z-index: 2;
+    min-width: 350px;
+}
+
+.card{
+    display: inline-block;
+    height: 200px;
+    justify-content: center;
+    align-items: center;
+    min-width: 350px;
+
+}
+.welcome-header-title{
+  font-weight: 400;
+}
+
+.backgroundImage{
+    width: 100vw;
+    max-width: 100%;
+    height: 300px;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-position: center !important;
+    filter: blur(3px);
+}
+
+
+
+.trailer-image:hover{
+    cursor: pointer;
+    /* border: 1px solid skyblue; */
+}
+
+.image-cont img {
+    height: 270px;
+}
+
+.slider-cont-trailer::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+
+.slider-cont::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+.example-card {
+    min-width: 140px;
+    box-shadow: none;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: transparent;
+    position: relative;
+    max-height: 370px;
+}
+
+.card-img {
+    border-radius: 10px;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.progress-spinner {
+    position: absolute;
+    z-index: 2;
+    bottom: 100px;
+    background-color: rgb(40, 36, 36);
+    border-radius: 28px;
+}
+
+.spinner-text {
+    position: absolute;
+    z-index: 3;
+    bottom: 110px;
+    left: 30px;
+    color: white;
+
+}
+.play-icon{
+    max-height: 50px;
+    max-width: 80px;
+    position: absolute;
+    top: 50px;
+}
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+
+  ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    background-color: white;
+    border-radius: 5px;
+  }
+
+  .trending-background{
+    background: url('../../../assets/1.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  .otherBackground{
+    background: url('../../../assets/1.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* filter: invert(1) opacity(80%); */
+  }
+
+  .play-icon{
+    position: absolute;
+    top: 60px;
+    transform: scale(1.5);
+  }
+
+  .play-icon:hover{
+    cursor: pointer;
+  }
+  .menuBtn{
+    position: absolute;
+    top: 0;
+    right: 0;
+    filter: brightness(0) invert(1);
+  }
+
+
+  .search-button{
+    cursor: pointer;
+  }
+
+
+  .round_search{
+    border-radius: 20px !important;
+  }
+
+  .search_box{
+    position: relative;
+  }
+
+  .search-button{
+    position: absolute;
+    right: 0px;
+    z-index: 2;
+  }
+
+
+.movie-card-title{
+  font-size: 14px;
+}
+
+.spinner-text:hover{
+  cursor: pointer;
+}
+
+
+

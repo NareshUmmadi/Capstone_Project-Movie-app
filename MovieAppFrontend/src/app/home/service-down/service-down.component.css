@@ -1,0 +1,43 @@
+.body{
+    background-image: url(src\assets\about-page-bg.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 480px;
+}
+
+main {
+    /* border: 2px solid green; */
+    color: black;
+    text-align: center;
+    position: relative;
+    width: fit-content;
+    align-items: center;
+}
+
+.header {
+    height: 233px;
+    line-height: 233px;
+    font-family: 'Shrikhand', cursive;
+    font-size: 8em;
+    font-weight: 400;
+    display: inline-block;
+}
+
+.dead-img {
+    display: inline-block;
+    transform: scale(0.4);
+    position: absolute;
+    top: 0px;
+    right: -135px;
+}
+
+.sub-header {
+    font-size: 3em;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+
+

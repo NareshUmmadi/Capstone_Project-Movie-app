@@ -1,0 +1,92 @@
+*{
+    box-sizing: border-box;
+}
+
+.main{
+    background-image: url("src\assets\back4.jpg");
+    /* background-image: url(src\assets\about-page-bg.svg); */
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 82%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+}
+
+.shipping-card{
+    /* background-color: rgba(0,0,0,.60); */
+    text-align: center;
+    border-radius: 4px;
+    min-width: auto;
+    max-width: 400px;
+    width: fit-content;
+    height: 390px;
+}
+
+mat-card-title{
+    position: relative;
+    top: 18px;
+    left: -2px;
+}
+
+mat-form-field{
+    width: 320px;
+}
+
+mat-label{
+    /* color: rgb(166, 165, 165); */
+    font-weight: bold;
+}
+
+.sign-in-form{
+    /* border: solid rebeccapurple 2px; */
+    margin: 0px auto;
+    position: relative;
+    top: 10%;
+}
+
+.col{
+    margin-top: 9px;
+}
+
+.mat-error{
+    font-size: 14px;
+}
+
+
+.btn-danger{
+    width: 280px;
+}
+
+.buttons{
+    width: 280px;
+    margin: auto;
+}
+
+.content{
+    /* border: solid rebeccapurple 2px; */
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+
+}
+
+.forget-pass-link{
+    text-decoration: none;
+    /* position: relative;
+    left: 22%; */
+
+}
+.forget-pass-link:hover{
+    text-decoration: underline;
+}
+
+.sign-up-link{
+    text-decoration: none;
+    /* float: left; */
+}
+.sign-up-link:hover{
+    text-decoration: underline;
+}
+

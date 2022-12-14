@@ -1,0 +1,39 @@
+<div class="container-fluid position-relative">
+    <div class="row background align-items-center">
+        <div class="col-12 col-md-8 d-flex flex-column flex-md-row align-items-center  justify-content-around">
+            <span class="profileimgcont">
+                <img class=" profileImg" [src]="imgSrc" alt="" srcset="">
+            </span>
+            <div class="margin-small">
+                <div class="h2 text-center text-white">Welcome, {{userDetail.userName | uppercase}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="usertab">
+    <p class="text-center h2 mb-2">All Users</p>
+    <mat-divider></mat-divider>
+</div>
+<div class="container">
+    <mat-card class="mb-3" *ngFor="let user of users">
+        <div class="row">
+            <div class="col-12 col-md-4 text-center">
+                <img class="profileImgUser margin-bottom-sm" src="data:image/png;base64,{{user.profileImage.imageData}}" alt="">
+            </div>
+            <div class="col-12 col-md-4 margin-bottom-sm">
+                <p class="h5 ">Username : {{user.userName | uppercase}}</p>
+                <p class="h6 ">Email : {{user.email}}</p>
+                <p class="h6 ">Credits : ${{user.credits}}</p>
+                <p *ngIf="isSubsctiptionActive(user)" class="h6">Subscription : Exp- {{user.subscription.deactivationDate|date:'mediumDate'}}</p>
+                <p *ngIf="!isSubsctiptionActive(user)" class="h6r">Subscription : No active subscription.</p>
+            </div>
+            <div class="col-12 col-md-4 d-flex flex-column align-items-center justify-content-center">
+                <button (click)="giftCredits(user)" class="col-10 col-md-8 mb-2" type="button" mat-raised-button
+                    color="primary">Gift Credits</button>
+                <button (click)="giftSubscription(user)" class="col-10 col-md-8 mb-2" type="button" mat-raised-button color="accent">Gift
+                    Subscription</button>
+                <button (click)="deleteAccount(user)" class="col-10 col-md-8" type="button" mat-raised-button color="warn">Remove account</button>
+            </div>
+        </div>
+    </mat-card>
+</div>

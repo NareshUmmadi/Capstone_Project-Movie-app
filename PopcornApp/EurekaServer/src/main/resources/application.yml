@@ -1,0 +1,13 @@
+#server:
+##  port: 8080
+#  error:
+#    include-message: always
+#  application:
+#    name: Eureka-Server
+
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+server:
+  port: 8761

@@ -1,0 +1,5 @@
+<div class="container d-flex flex-column justify-content-center align-items-center">
+    <p class="h1 text-center">Your account has not been verified yet ..!!</p>
+    <p class="h2 text-center">Please click on the verification link sent to your mail <span>{{this._user.tmpUser.email}}</span> to verify.</p>
+    <button (click)="resendMail()" class="d-block" color="accent" mat-raised-button type="button">Click to resend verification</button>
+</div>

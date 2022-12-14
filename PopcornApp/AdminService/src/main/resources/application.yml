@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: Admin-Service
+  data:
+    mongodb:
+      host: ${MONGO_HOST:localhost}
+      port: 27017
+      database: movieapp
+
+server:
+  port: 8088
+  error:
+    include-message: always

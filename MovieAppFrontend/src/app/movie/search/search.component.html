@@ -1,0 +1,68 @@
+<div class="welcome-header">
+    <p class="pt-5 ps-4 pb-5 display-3 text-white"></p>
+    <div class="container mt-5">
+        <div class="row justify-content-center pt-5 mt-5">
+            <div class="col-10 mt-5">
+                <div class="input-group justify-content-center">
+                    <input type="text" class="form-control search-bar" placeholder="Search Here" [(ngModel)]="movieName"
+                        (input)="get()">
+                    <span class="input-group-text" id="basic-addon2">
+                        <mat-icon>search</mat-icon>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="container-fluid">
+
+        <div class="cont d-flex flex-row justify-content-end">
+            <mat-form-field appearance="fill" class="sort mt-2 me-5">
+                <mat-label>Sort</mat-label>
+                <mat-select  data-testid="sort">
+                    <mat-option (click)="sortByName()" value="By Name">By Name</mat-option>
+                    <mat-option (click)="sortByDate()" value="By Date">By Date</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="row justify-content-center mb-3 mt-3" *ngFor="let movie of movieList">
+            <mat-card class="example-card col-11 shadow">
+                <div class="row">
+                    <img class="imgCardFavourite col-4" src="https://image.tmdb.org/t/p/original{{movie.poster_path}}">
+                    <div class="col-8">
+                        <div class="row card-row">
+                            <mat-progress-spinner [diameter]="45" class="col-3 progress-spinner" color="warn"
+                                mode="determinate" [value]="(movie.vote_average*10)">
+                            </mat-progress-spinner>
+                            <span class="spinner-text">{{movie.vote_average*10}}<sup>%</sup></span>
+                            <div class="col-8">
+                                <div (click)="openMovieDetail(movie)" class="movieTitle h6">{{movie.title}}</div>
+                                <p class="text-mute h6">{{movie.release_date | date:'mediumDate'}}</p>
+                            </div>
+                        </div>
+                        <div class="row d-none d-md-inline">
+                            <p>{{movie.overview}}</p>
+                        </div>
+                        <ng-template [ngIf]="this._user.isUserLoggedIn()">
+                            <div class="row ps-5">
+                                <button (click)="addToFavourite(movie)" *ngIf="!this._user.isPresentInFavourite(movie)"
+                                    class="col-4" mat-button color="accent">
+                                    <mat-icon>favorite</mat-icon>
+                                    <span class="d-none d-md-inline">Add to favourite</span>
+                                </button>
+                                <button (click)="addToWatchList(movie)" *ngIf="!this._user.isPresentInWatchlist(movie)"
+                                    class="col-4" mat-button color="accent">
+                                    <mat-icon>bookmark</mat-icon>
+                                    <span class="d-none d-md-inline">Add to Watchlist</span>
+                                </button>
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+</div>

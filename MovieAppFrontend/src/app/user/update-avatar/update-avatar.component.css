@@ -1,0 +1,26 @@
+.profileImg {
+    /* border: 2px solid #90cea1; */
+    height: 160px;
+    width: 160px;
+    border-radius: 80%;
+}
+
+.updateBox{
+    width: 400px;
+}
+
+.custom{
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+
+
+@media only screen and (max-width: 600px) {
+    .profileImg {
+        height: 100px;
+        width: 100px;
+        border-radius: 80%;
+    }
+
+}

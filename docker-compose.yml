@@ -1,0 +1,88 @@
+version: '3.3'
+services:
+
+  mongoservice:
+    image: mongo:latest
+    ports:
+     - 27017:27017
+    container_name: mongocont
+
+  frontend:
+    image: angularfrontend
+    ports:
+      - 80:80
+    build: ./MovieAppFrontend/
+
+  apiGatewayService:
+    image: apigateway
+    build: ./PopcornApp/api-gateway/
+    restart: always
+    container_name: gatewayCont
+    ports:
+      - 8090:8090
+
+  eurekaService:
+    image: eurekaimage
+    build: ./PopcornApp/EurekaServer/
+    restart: always
+    container_name: eurekaCont
+    ports:
+      - 8761:8761
+
+  messageService:
+    image: messageimage
+    build: ./PopcornApp/message-service/
+    restart: always
+    container_name: messageCont
+    ports:
+      - 8086:8086
+
+  adminService:
+    image: adminimage
+    build: ./PopcornApp/AdminService/
+    restart: always
+    container_name: adminCont
+    depends_on:
+      - mongoservice
+    ports:
+      - 8088:8088
+
+  customerService:
+    image: customerimage
+    build: ./PopcornApp/CustomerService/
+    restart: always
+    container_name: customer-container
+    # environment:
+    #   MONGO_HOST: mongocont
+    depends_on:
+      - mongoservice
+    ports:
+      - 8082:8082
+
+  authservice:
+    image: authimage
+    build: ./PopcornApp/auth-service/
+    container_name: auth-container
+    restart: always
+    environment:
+      MYSQL_HOST: mysql-container
+    depends_on:
+      - mysqlservice
+    ports:
+      - 8084:8084
+
+  mysqlservice:
+      image: mysql
+      ports:
+        - 3306:3306
+      expose:
+        - 3306
+      container_name: mysql-container
+      hostname: localhost
+#      command: --default-authentication-plugin=mysql_native_password
+      environment:
+        MYSQL_ROOT_PASSWORD: Solanki@0000
+        # MYSQL_USER: user
+        # MYSQL_PASSWORD: Solanki@0000
+        MYSQL_DATABASE: movieApp
+        MYSQL_ALLOW_EMPTY_PASSWORD: "yes"

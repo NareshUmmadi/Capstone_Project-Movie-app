@@ -1,0 +1,146 @@
+<div class="container-fluid main_row header">
+    <div id="backgroundImage"></div>
+    <div class="outerCont row">
+        <div class="col poster">
+            <img *ngIf="movieDetail!=undefined" src="https://image.tmdb.org/t/p/original{{movieDetail.poster_path}}" alt="img">
+        </div>
+
+        <div class="col content">
+            <div class="row row_1">
+                <h1 *ngIf="movieDetail!=undefined" class="title mt-2 h1 fw-bold font-monospace">{{movieDetail.title}} <span></span>
+                    <span class="fw-bold year"> ({{movieDetail.release_date
+                        | date: "yyyy"}})
+                    </span>
+                </h1>
+                <div>
+                    <span class="release fw-bold" *ngIf="movieDetail!=undefined">{{movieDetail.release_date | date: "dd/MM/yy"}} </span><span
+                        class="fw-bold dot"> . </span>
+                        <ng-template *ngIf="movieDetail!=undefined">
+                            <span class="genres fw-bold" *ngFor="let g of movieDetail.genres" >{{g.name}}, </span><span
+                            class="fw-bold dot fw-bold"> . </span>
+                        </ng-template>
+                    <span class="runtime fw-bold" *ngIf="movieDetail!=undefined">{{movieDetail.runtime | date: "hh:mm"}}</span>
+                </div>
+            </div>
+
+            <div class="row row_2">
+                <ul class="row_2_list">
+                    <li>
+                        <mat-progress-spinner *ngIf="movieDetail!=undefined" [diameter]="50" class="progress-spinner-main" color="warn"
+                            mode="determinate" [value]="(movieDetail.vote_average*10)">
+                        </mat-progress-spinner>
+                        <span matTooltip="IMDB Rating" class="spinner-text-main" *ngIf="movieDetail!=undefined">{{movieDetail.vote_average*10 | number:
+                            '1.0-0'}}<sup>%</sup></span>
+                    </li>
+                    <li>
+                        <button (click)="addToFavourite(movieDetail)" *ngIf="this._user.userDetail!=undefined && this.movieDetail!=undefined && !this._user.isPresentInFavourite(movieDetail) ; else faviconelse" mat-mini-fab matTooltip="Add to favourite" aria-label="Example icon button with a menu icon">
+                            <mat-icon>favorite</mat-icon>
+                        </button>
+                        <ng-template #faviconelse>
+                            <button (click)="removeFromFavourite(movieDetail)" matTooltip="Remove from favourite" mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
+                                <mat-icon>favorite</mat-icon>
+                            </button>
+                        </ng-template>
+                    </li>
+                    <li>
+                        <button (click)="addToWatchlist(movieDetail)" matTooltip="Add to watchlist" *ngIf="this._user.userDetail!=undefined && this.movieDetail!=undefined && !this._user.isPresentInWatchlist(movieDetail) ; else bookIconElse" mat-mini-fab aria-label="Example icon button with a menu icon">
+                            <mat-icon>bookmark</mat-icon>
+                        </button>
+                        <ng-template #bookIconElse>
+                            <button (click)="removeFromWatchlist(movieDetail)" matTooltip="Remove from watchlist" mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
+                                <mat-icon>bookmark</mat-icon>
+                            </button>
+                        </ng-template>
+                    </li>
+                    <li>
+                        <button class="fw-bold" mat-button style="color:black; text-decoration: none;" (click)="playOfficialTeaser()">
+                            <mat-icon>play_arrow</mat-icon>Play Trailer
+                        </button>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="row row_3">
+                <p *ngIf="movieDetail!=undefined" class="tagline fst-italic fw-bold" style="color: gray;">{{movieDetail.tagline}}</p><br>
+                <h1 class="fw-bold d-none d-md-block">Overview</h1>
+                <p *ngIf="movieDetail!=undefined" class="fw-normal fw-bold d-none d-md-block">{{movieDetail.overview}}</p>
+            </div>
+        </div>
+        <!-- </div> -->
+    </div>
+</div>
+
+<div class="py-2 mt-5 trending-background">
+    <p class="h2 ms-5 fw-bold font-ubuntu">Top Billed Cast</p>
+    <div class="slider-cont">
+        <mat-card appZoomHover matRipple class="movie-cast example-card mx-2 mat-elevation-z4" *ngFor="let cast of movieCast">
+            <img mat-card-image class="card-img" src="https://image.tmdb.org/t/p/original{{cast.profile_path}}"
+                alt="Photo of a Shiba Inu">
+            <mat-card-title class="mt-2 mat-h4 fw-bold">{{cast.name}}</mat-card-title>
+            <mat-card-subtitle>{{cast.character}}</mat-card-subtitle>
+        </mat-card>
+    </div>
+</div>
+
+<!-- <div class="card-bg"></div> -->
+
+<div class="py-2">
+    <p class="h2 ms-5 fw-bold font-ubuntu">Similar Movies</p>
+    <div class="slider-cont">
+        <mat-card appZoomHover matRipple class="example-card mx-2 mat-elevation-z4" *ngFor="let movie of recommandationMovies">
+            <img mat-card-image class="card-img" src="https://image.tmdb.org/t/p/original{{movie.poster_path}}"
+                alt="Photo of a Shiba Inu" (click)="sendToMoviePage(movie.id)">
+            <mat-progress-spinner [diameter]="45" class="progress-spinner" color="warn" mode="determinate"
+                [value]="(movie.vote_average*10)">
+            </mat-progress-spinner>
+            <span matTooltip="IMDB Rating" class="spinner-text">{{movie.vote_average*10 | number: '1.0-0'}}<sup>%</sup></span>
+            <mat-card-title class="mt-2 mat-h4 fw-bold">{{(movie.title.length>25)?((movie.title | slice:0:25)+".."):movie.title}}</mat-card-title>
+            <mat-card-subtitle>{{movie.release_date | date: 'MMM d, y'}}</mat-card-subtitle>
+            <ng-template [ngIf]="this._user.isUserLoggedIn()">
+                <button class="menuBtn" mat-icon-button [matMenuTriggerFor]="menu">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item *ngIf="!this._user.isPresentInFavourite(movie); else favelse"
+                        (click)="addToFavourite(movie)">
+                        <mat-icon>favorite</mat-icon>
+                        <span>Add to Favourite</span>
+                    </button>
+                    <ng-template #favelse>
+                        <button mat-menu-item (click)="removeFromFavourite(movie)">
+                            <mat-icon color="primary">favorite</mat-icon>
+                            <span>Remove from Favourite</span>
+                        </button>
+                    </ng-template>
+                    <button mat-menu-item *ngIf="!this._user.isPresentInWatchlist(movie); else watchelse"
+                        (click)="addToWatchlist(movie)">
+                        <mat-icon>bookmark</mat-icon>
+                        <span>Add to Watchlist</span>
+                    </button>
+                    <ng-template #watchelse>
+                        <button mat-menu-item (click)="removeFromWatchlist(movie)">
+                            <mat-icon color="primary">bookmark</mat-icon>
+                            <span>Remove from Watchlist</span>
+                        </button>
+                    </ng-template>
+                </mat-menu>
+            </ng-template>
+        </mat-card>
+    </div>
+</div>
+
+<div class="tailer-cont mt-3 mb-3">
+    <div #image class="backgroundImage">
+    </div>
+    <p class="heading-trailer font-ubuntu fw-bold h2 ms-5 text-white">Media</p>
+    <div class="slider-cont-trailer px-3">
+        <div class="mycard d-flex flex-column me-4" *ngFor="let trailer of trailers">
+            <div appZoomHover class="image-cont " (mouseenter)="changeBackground(trailer)">
+                <img (click)="play(trailer)" class="trailer-image"
+                    src="https://img.youtube.com/vi/{{trailer.key}}/hqdefault.jpg" alt="trailer.title">
+                <img (click)="play(trailer)" class="play-icon" style="filter: brightness(0) invert(1);" src="../../../assets/2.svg" alt="">
+            </div>
+            <p class="h5 text-center text-white mt-2">{{trailer.name}}</p>
+        </div>
+    </div>
+</div>

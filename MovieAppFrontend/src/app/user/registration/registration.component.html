@@ -1,0 +1,87 @@
+<div class="main">
+    <mat-card class="shipping-card">
+        <mat-card-header class="header">
+            <mat-card-title>Sign Up</mat-card-title>
+        </mat-card-header>
+
+        <div class="profile_div" *ngIf="profileUrl">
+            <img class="profile" src={{profileUrl}} alt="img">
+        </div>
+
+        <div class="profile_div default" *ngIf="!profileUrl">
+            <img class="profile default" src="..\assets\profile.png" alt="">
+        </div>
+
+        <form class="sign-in-form " [formGroup]="signUpForm" (ngSubmit)="signUp()">
+
+            <div class="col mt-0">
+                <mat-form-field appearance="fill" class="col-lg-4">
+                    <mat-label>Email Address</mat-label>
+                    <input id="email" type="email" matInput formControlName="email">
+                    <mat-error
+                        *ngIf="signUpForm.get('email')?.touched && signUpForm.get('email')?.hasError('required')">
+                        Email is required</mat-error>
+                    <mat-error *ngIf="signUpForm.get('email')?.touched && signUpForm.get('email')?.hasError('email')">
+                        Email must be valid</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="col">
+                <mat-form-field appearance="fill">
+                    <mat-label>User Name</mat-label>
+                    <input id="name" type="text" matInput formControlName="userName">
+                    <mat-error
+                        *ngIf="signUpForm.get('userName')?.touched && signUpForm.get('userName')?.hasError('required')">
+                        Name is required</mat-error>
+                </mat-form-field>
+            </div>
+
+
+            <div class="col">
+                <mat-form-field appearance="fill">
+                    <mat-label>Password</mat-label>
+                    <input id="pass" type="password" matInput formControlName="password">
+                    <mat-error
+                        *ngIf="signUpForm.get('password')?.touched && signUpForm.get('password')?.errors?.['required']">
+                        Password is required</mat-error>
+                    <mat-error
+                        *ngIf="signUpForm.get('password')?.errors?.['minlength']">
+                        Password must be greater than 4</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="col">
+                <mat-form-field appearance="fill">
+                    <mat-label>Confirm Password</mat-label>
+                    <input id="confirmPass" type="password" matInput formControlName="confirmPassword">
+                    <mat-error
+                        *ngIf="signUpForm.get('confirmPassword')?.touched && signUpForm.get('confirmPassword')?.errors?.['required']">
+                        password is required</mat-error>
+                    <mat-error
+                        *ngIf="signUpForm.get('confirmPassword')?.touched && signUpForm.get('confirmPassword')?.errors?.['confirmPasswordError']">
+                        Password does not match</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="col">
+                <mat-form-field appearance="fill">
+                    <mat-label>Upload Profile</mat-label>
+                    <ngx-mat-file-input formControlName="image" class="file-input" accept="image/png, image/jpeg" (change)="onFileSelected($event)"
+                        #fileUpload>
+                    </ngx-mat-file-input>
+                </mat-form-field>
+            </div>
+
+            <div class="buttons">
+                <!-- <button type="submit" class="btn btn-danger" [disabled]="!signUpForm.valid">Sign-Up</button> -->
+                <button type="submit" class="btn btn-danger">Sign-Up</button>
+            </div>
+
+        </form>
+
+        <div class="content">
+            Already have an account? <a class="sign-up-link" href="#">Sign In now.</a>
+        </div>
+
+    </mat-card>
+</div>

@@ -1,0 +1,21 @@
+eureka server - port 8080
+
+
+
+
+Customer-Service - port 8082
+
+
+auth-Service - port 8084
+
+Api-Gateway - port 8090
+
+
+admin service -- port 8088
+
+message service -- 8086
+
+
+
+
+

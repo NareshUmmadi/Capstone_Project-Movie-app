@@ -1,0 +1,89 @@
+*{
+    box-sizing: border-box;
+}
+
+.main{
+    background-image: url("src\assets\back4.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 82%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+}
+
+.shipping-card{
+    /* background-color: rgba(0,0,0,.75); */
+    /* border: 2px solid red; */
+    text-align: center;
+    border-radius: 4px;
+    min-width: auto;
+    max-width: 400px;
+    height: 340px;
+}
+
+mat-card-title{
+    position: relative;
+    top: 18px;
+    left: -2px;
+}
+
+mat-form-field{
+    width: 320px;
+}
+
+mat-label{
+    /* color: rgb(166, 165, 165); */
+    font-weight: bold;
+}
+
+.col{
+    margin-top: 9px;
+}
+
+.mat-error{
+    font-size: 14px;
+}
+
+
+.msg{
+    /* border: solid rebeccapurple 2px; */
+    text-align: center;
+    font-weight: bolder;
+    position: relative;
+    top: 12%;
+}
+
+.sign-in-form{
+    /* border: solid rebeccapurple 2px; */
+    margin: 0px auto;
+    position: relative;
+    top: 15%;
+}
+
+.btn-danger{
+    width: 280px;
+}
+
+.buttons{
+    width: 280px;
+    margin: 10px auto;
+}
+
+.content{
+    /* border: solid rebeccapurple 2px; */
+    width: fit-content;
+    margin: 0px auto;
+    position: relative;
+    top: 16%;
+    
+}
+
+.sign-up-link{
+    text-decoration: none;
+}
+.sign-up-link:hover{
+    text-decoration: underline;
+}
+

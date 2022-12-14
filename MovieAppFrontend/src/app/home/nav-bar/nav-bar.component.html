@@ -1,0 +1,81 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [mode]="(isHandset$ | async) ? 'over' : 'side'">
+    <p *ngIf="(this._user.isUserLoggedIn() || this._user.isAdminLoggedIn()) && this._user.userDetail!=undefined"
+      class="h6 mt-4 text-center">Hi, {{this._user.userDetail.userName | uppercase}}</p>
+    <p *ngIf="!(this._user.isUserLoggedIn() || this._user.isAdminLoggedIn())" class="h6 mt-4 text-center">Login for
+      features</p>
+    <mat-nav-list>
+      <ng-template [ngIf]="this._user.isUserLoggedIn() || this._user.isAdminLoggedIn()">
+        <a mat-list-item (click)="goToUserProfilePage()">
+          <mat-icon>person</mat-icon>Profile
+        </a>
+        <a mat-list-item (click)="signOut()">
+          <mat-icon>logout</mat-icon>Logout
+        </a>
+      </ng-template>
+      <ng-template [ngIf]="!(this._user.isUserLoggedIn() || this._user.isAdminLoggedIn())">
+        <a mat-list-item routerLink="login">
+          <mat-icon class="ms-2 me-2">login</mat-icon>SignIn
+        </a>
+        <a mat-list-item routerLink="register">
+          <mat-icon class="ms-2 me-2">input</mat-icon>Register
+        </a>
+      </ng-template>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button class="d-md-none" type="button" mat-icon-button (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <img class="nav_logo" src="../../../assets/movieapp.gif" alt="">
+      <button class="h4" (click)="homepage()" color="primary" mat-raised-button>
+        <img class="logo_icon_name" src="../../../assets/pop6.jpg" alt="">
+      </button>
+      <span class="example-spacer"></span>
+      <button data-testid="darkMode" *ngIf="!darkMode" color="accent" (click)="changeToDarkTheme()" mat-icon-button>
+        <mat-icon matTooltip="Dark Mode">dark_mode</mat-icon>
+      </button>
+      <button *ngIf="darkMode" color="accent" (click)="changeToLightTheme()" mat-icon-button>
+        <mat-icon matTooltip="Light Mode">light_mode</mat-icon>
+      </button>
+      <button matTooltip="Account"
+        *ngIf="(this._user.isUserLoggedIn() || this._user.isAdminLoggedIn()) && this._user.userDetail!=undefined"
+        class="account-menu-button d-none d-md-inline" mat-button color="accent" [matMenuTriggerFor]="menu">
+        <mat-icon class="">account_circle</mat-icon>
+        <span class="ms-1">{{this._user.userDetail.userName | uppercase}}</span>
+      </button>
+      <mat-menu #menu="matMenu" xPosition="before">
+        <button (click)="goToUserProfilePage()" mat-menu-item>
+          <mat-icon>person</mat-icon>
+          <span>Profile</span>
+        </button>
+        <button (click)="signOut()" mat-menu-item>
+          <mat-icon>logout</mat-icon>
+          <span>Sign Out</span>
+        </button>
+      </mat-menu>
+
+      <button *ngIf="!(this._user.isUserLoggedIn() || this._user.isAdminLoggedIn())"
+        class="account-menu-button d-none d-md-inline" mat-button color="accent" [matMenuTriggerFor]="menu2">
+        <mat-icon matTooltip="Account" class="logout_account_circle_icon">account_circle</mat-icon>
+      </button>
+      <mat-menu #menu2="matMenu" xPosition="before">
+        <button (click)="signIn()" mat-menu-item>
+          <mat-icon>login</mat-icon>
+          <span>SignIn</span>
+        </button>
+        <button (click)="register()" mat-menu-item>
+          <mat-icon>how_to_reg</mat-icon>
+          <span>Register</span>
+        </button>
+      </mat-menu>
+
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+
+    <div #footer class="footer py-2 d-flex align-items-center justify-content-center">
+      <p class="h4">&copy; Popcorn Inc.</p>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

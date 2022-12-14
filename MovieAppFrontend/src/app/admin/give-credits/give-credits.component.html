@@ -1,0 +1,16 @@
+<div class="container credit-cont">
+    <div class="row">
+        <p>Username : {{user.userName}}</p>
+        <p>Credits : ${{user.credits}}</p>
+    </div>
+    <div class="row">
+        <mat-form-field class="example-form-field">
+            <mat-label>Credits to Gift</mat-label>
+            <input matInput type="number" #credits [formControl]="creditControl">
+        </mat-form-field>
+    </div>
+    <div class="row">
+        <button (click)="giftCredits(credits.value)" class="mb-2" mat-raised-button color="primary">Gift Credits</button>
+        <button (click)="close()" mat-raised-button color="warn">Cancel</button>
+    </div>
+</div>

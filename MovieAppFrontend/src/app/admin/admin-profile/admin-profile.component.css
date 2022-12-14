@@ -1,0 +1,108 @@
+.background {
+    /* height: 250px; */
+    padding: 40px 0;
+    /* border: 1px solid; */
+    background: url('../../../assets/3.svg');
+    background-color: #16375b;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.profileImg {
+    border: 2px solid #90cea1;
+    height: 160px;
+    width: 160px;
+    border-radius: 80%;
+}
+.profileImgUser {
+    border: 2px solid #90cea1;
+    height: 100px;
+    width: 100px;
+    border-radius: 80%;
+}
+
+.imgCardFavourite {
+    max-height: 200px;
+    max-width: 160px;
+}
+
+::ng-deep.mat-tab-label,
+::ng-deep.mat-tab-label-active {
+    max-width: 150px !important;
+    margin-bottom: 10px;
+}
+
+::ng-deep.mat-tab-label:first-child,
+::ng-deep.mat-tab-label-active:first-child {
+    margin-left: 50px !important;
+}
+::ng-deep.mat-tab-label:nth-child(2),
+::ng-deep.mat-tab-label-active:nth-child(2) {
+    margin-left: 20px !important;
+}
+
+
+.tab-icon {
+    transform: scale(1.1);
+    position: relative;
+    bottom: 3px;
+}
+
+.card-row{
+    position: relative;
+}
+
+.progress-spinner {
+    background-color: rgb(40, 36, 36);
+    border-radius: 22px;
+    border: 1px solid rgb(40, 36, 36);
+}
+
+.spinner-text{
+    top: 12px;
+    position: absolute;
+    color: white;
+}
+
+.profileimgcont{
+    position: relative;
+}
+
+.profileEditIcon{
+    position: absolute;
+    top: 0;
+    /* right: 0px; */
+    color: yellow;
+
+}
+
+.profilemenu{
+    position: absolute;
+    top: 0;
+    right: 20px;
+}
+
+.movieTitle:hover{
+    text-decoration: underline;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-block;
+}
+
+
+@media only screen and (max-width:600px) {
+    .margin-small{
+        margin: 10px 0;
+    }
+}
+
+@media only screen and (max-width:600px) {
+    .margin-bottom-sm{
+        margin-bottom: 10px;
+    }
+}
+
+
+.usertab{
+    height: 60px;
+}

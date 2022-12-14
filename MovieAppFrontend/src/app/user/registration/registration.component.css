@@ -1,0 +1,129 @@
+* {
+    box-sizing: border-box;
+}
+
+.main {
+    background-image: url("src\assets\back4.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 115%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+
+}
+
+.shipping-card {
+    /* border: 2px solid red; */
+    text-align: center;
+    border-radius: 4px;
+    min-width: auto;
+    max-width: 500px;
+    height: fit-content;
+}
+
+.profile {
+    /* overflow: auto; */
+    max-width: 120px;
+    max-height: 120px;
+    border-radius: 80%;
+    position: relative;
+    top: -30px;
+
+    border: 2px solid #90cea1;
+    height: 130px;
+    width: 130px;
+    border-radius: 80%;
+}
+
+mat-form-field {
+    /* border: solid tomato 2px; */
+    max-width: 470px;
+    width: 300px;
+    min-width: auto;
+}
+
+.mat-error {
+    font-size: 10px;
+}
+
+.col {
+    margin-top: 9px;
+}
+
+@media only screen and (min-width: 576px) {
+    .mat-form-field {
+        width: 470px;
+    }
+
+    .profile {
+        /* max-width: 135px;
+        max-height: 135px;
+        border-radius: 100px;
+        position: relative;
+        top: -30px; */
+
+        border: 2px solid #90cea1;
+        height: 140px;
+        width: 140px;
+        border-radius: 80%;
+    }
+
+    .header {
+        /* border: 2px solid black; */
+        font-weight: bolder;
+        width: fit-content;
+
+    }
+
+    .mat-card-title {
+        /* border: 2px solid green; */
+        margin: 10px;
+        font-weight: bold;
+        font-size: x-large;
+    }
+
+    .mat-error {
+        font-size: 14px;
+    }
+
+    .col {
+        margin-top: 10px;
+    }
+}
+
+mat-label {
+    font-weight: bold;
+}
+
+.sign-in-form {
+    /* border: solid rebeccapurple 2px; */
+    margin: 0px auto;
+}
+
+.content {
+    /* border: solid rebeccapurple 2px; */
+    width: fit-content;
+    margin: 0px auto;
+    position: relative;
+    top: 5px;
+}
+
+.sign-up-link {
+    text-decoration: none;
+}
+
+.sign-up-link:hover {
+    text-decoration: underline;
+}
+
+.btn-danger {
+    width: 280px;
+}
+
+.buttons {
+    width: 280px;
+    min-width: auto;
+    margin: auto;
+}

@@ -1,0 +1,47 @@
+<div class="main">
+    <mat-card class="shipping-card">
+        <mat-card-header class="header">
+            <mat-card-title><strong>Sign In</strong></mat-card-title>
+        </mat-card-header>
+
+        <form class="sign-in-form" [formGroup]="loginForm" (ngSubmit)="login()">
+            <div class="row first">
+                <mat-form-field class="mb-2" appearance="fill">
+                    <mat-label>Email Address</mat-label>
+                    <input id="email" type="email" matInput formControlName="email">
+                    <mat-error *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.hasError('required')">
+                        Email is required</mat-error>
+                    <mat-error *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.hasError('email')">
+                        Email must be valid</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="row">
+                <mat-form-field appearance="fill">
+                    <mat-label>Password</mat-label>
+                    <input id="pass" type="password" matInput formControlName="password">
+                    <mat-error
+                        *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['required']">
+                        password is required</mat-error>
+                    <mat-error
+                        *ngIf="loginForm.get('password')?.errors?.['minlength'] || loginForm.get('password')?.errors?.['maxlength']">
+                        password must between 4-6</mat-error>
+                </mat-form-field>
+            </div>
+
+            <br>
+            <div class="buttons">
+                <!-- <button type="submit" mat-stroked-button color="primary" [disabled]="!loginForm.valid">Login</button> -->
+                <button type="submit" class="btn btn-danger" data-testid="sign-in">Sign-In</button>
+            </div>
+
+            <div class="content">
+                <a class="sign-up-link" routerLink="/register"><span>New to Popcorn? </span> Sign up</a> <a class="forget-pass-link"
+                   routerLink="/forgot">Forgot
+                    Password?</a>
+            </div>
+        </form>
+
+
+    </mat-card>
+</div>

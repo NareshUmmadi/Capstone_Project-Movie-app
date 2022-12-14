@@ -1,0 +1,172 @@
+<div class="welcome-header">
+    <p class="pt-5 ps-4 display-3 welcome-header-title text-white">Welcome..</p>
+    <p class="text-white h3 ps-4">Millions of movies & people to discover. Explore now.</p>
+    <div class="container mt-5">
+        <div class="row justify-content-center pt-3">
+            <div class="col-8">
+                <div class="input-group search_box mb-3">
+                    <input data-testid="search" (keyup.enter)="searchMovie(searchInput.value)" #searchInput type="text" class="form-control round_search" placeholder="Search Here">
+                    <span (click)="searchMovie(searchInput.value)" class="input-group-text round_search search-button" id="basic-addon2">
+                        <mat-icon >search</mat-icon>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="tailer-cont mt-3 mb-3">
+    <div #image class="backgroundImage">
+    </div>
+    <p class="heading-trailer font-ubuntu fw-bold h2 ms-5 text-white">Latest Trailers</p>
+    <div class="slider-cont-trailer px-3">
+        <div class="mycard d-flex flex-column me-4" *ngFor="let trailer of trailers">
+            <div appZoomHover class="image-cont " (mouseenter)="changeBackground(trailer)">
+                <img (click)="play(trailer)" class="trailer-image"
+                    src="https://img.youtube.com/vi/{{trailer.key}}/hqdefault.jpg" alt="trailer.title">
+                <img (click)="play(trailer)" class="play-icon" style="filter: brightness(0) invert(1);"
+                    src="../../../assets/2.svg" alt="">
+            </div>
+            <p class="h5 text-center text-white mt-2">{{trailer.title}}</p>
+        </div>
+    </div>
+</div>
+
+<div class="py-2 mt-5 trending-background">
+    <p class="h2 ms-5 fw-bold font-ubuntu">Trending</p>
+    <div class="slider-cont">
+        <mat-card appZoomHover matRipple class="example-card mx-2 mat-elevation-z4"
+            *ngFor="let movie of nowPlayingMovies">
+            <img mat-card-image class="card-img" src="https://image.tmdb.org/t/p/original{{movie.poster_path}}"
+                alt="Photo of a Shiba Inu" (click)="sendToMoviePage(movie.id)" data-testid="movie-card">
+            <mat-progress-spinner [diameter]="45" class="progress-spinner" color="warn" mode="determinate"
+                [value]="(movie.vote_average*10)">
+            </mat-progress-spinner>
+            <span matTooltip="IMDB Rating" class="spinner-text">{{movie.vote_average*10}}<sup>%</sup></span>
+            <mat-card-title class="mt-2 movie-card-title fw-bold">{{(movie.title.length>25)?((movie.title | slice:0:25)+".."):movie.title}}</mat-card-title>
+            <mat-card-subtitle>{{movie.release_date | date: 'MMM d, y'}}</mat-card-subtitle>
+            <ng-template [ngIf]="this._user.isUserLoggedIn()">
+                <button class="menuBtn" mat-icon-button [matMenuTriggerFor]="menu">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item *ngIf="!this._user.isPresentInFavourite(movie); else favelse"
+                        (click)="addToFavourite(movie)">
+                        <mat-icon>favorite</mat-icon>
+                        <span>Add to Favourite</span>
+                    </button>
+                    <ng-template #favelse>
+                        <button mat-menu-item (click)="removeFromFavourite(movie)">
+                            <mat-icon color="primary">favorite</mat-icon>
+                            <span>Remove from Favourite</span>
+                        </button>
+                    </ng-template>
+                    <button mat-menu-item *ngIf="!this._user.isPresentInWatchlist(movie); else watchelse"
+                        (click)="addToWatchlist(movie)">
+                        <mat-icon>bookmark</mat-icon>
+                        <span>Add to Watchlist</span>
+                    </button>
+                    <ng-template #watchelse>
+                        <button mat-menu-item (click)="removeFromWatchlist(movie)">
+                            <mat-icon color="primary">bookmark</mat-icon>
+                            <span>Remove from Watchlist</span>
+                        </button>
+                    </ng-template>
+                </mat-menu>
+            </ng-template>
+        </mat-card>
+    </div>
+</div>
+
+<div class="py-2 otherBackground">
+    <p class="h2 ms-5 fw-bold font-ubuntu">Top Rated</p>
+    <div class="slider-cont">
+        <mat-card appZoomHover matRipple class="example-card mx-2 mat-elevation-z4"
+            *ngFor="let movie of topRatedMovies">
+            <img mat-card-image class="card-img" src="https://image.tmdb.org/t/p/original{{movie.poster_path}}"
+                alt="Photo of a Shiba Inu" (click)="sendToMoviePage(movie.id)">
+            <mat-progress-spinner [diameter]="45" class="progress-spinner" color="warn" mode="determinate"
+                [value]="(movie.vote_average*10)">
+            </mat-progress-spinner>
+            <span matTooltip="IMDB Rating" class="spinner-text">{{movie.vote_average*10}}<sup>%</sup></span>
+            <mat-card-title class="mt-2 movie-card-title fw-bold">{{(movie.title.length>25)?((movie.title | slice:0:25)+".."):movie.title}}</mat-card-title>
+            <mat-card-subtitle>{{movie.release_date | date: 'MMM d, y'}}</mat-card-subtitle>
+            <ng-template [ngIf]="this._user.isUserLoggedIn()">
+                <button class="menuBtn" mat-icon-button [matMenuTriggerFor]="menu">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item *ngIf="!this._user.isPresentInFavourite(movie); else favelse"
+                        (click)="addToFavourite(movie)">
+                        <mat-icon>favorite</mat-icon>
+                        <span>Add to Favourite</span>
+                    </button>
+                    <ng-template #favelse>
+                        <button mat-menu-item (click)="removeFromFavourite(movie)">
+                            <mat-icon color="primary">favorite</mat-icon>
+                            <span>Remove from Favourite</span>
+                        </button>
+                    </ng-template>
+                    <button mat-menu-item *ngIf="!this._user.isPresentInWatchlist(movie); else watchelse"
+                        (click)="addToWatchlist(movie)">
+                        <mat-icon>bookmark</mat-icon>
+                        <span>Add to Watchlist</span>
+                    </button>
+                    <ng-template #watchelse>
+                        <button mat-menu-item (click)="removeFromWatchlist(movie)">
+                            <mat-icon color="primary">bookmark</mat-icon>
+                            <span>Remove from Watchlist</span>
+                        </button>
+                    </ng-template>
+                </mat-menu>
+            </ng-template>
+        </mat-card>
+    </div>
+</div>
+
+
+<div class="py-2 otherBackground">
+    <p class="h2 ms-5 fw-bold font-ubuntu">Popular</p>
+    <div class="slider-cont">
+        <mat-card appZoomHover matRipple class="example-card mx-2 mat-elevation-z4" *ngFor="let movie of popularMovies">
+            <img mat-card-image class="card-img" src="https://image.tmdb.org/t/p/original{{movie.poster_path}}"
+                alt="Photo of a Shiba Inu" (click)="sendToMoviePage(movie.id)">
+            <mat-progress-spinner [diameter]="45" class="progress-spinner" mode="determinate"
+                [value]="(movie.vote_average*10)">
+            </mat-progress-spinner>
+            <span matTooltip="IMDB Rating" class="spinner-text">{{movie.vote_average*10}}<sup>%</sup></span>
+            <mat-card-title class="mt-2 movie-card-title fw-bold">{{(movie.title.length>25)?((movie.title | slice:0:25)+".."):movie.title}}</mat-card-title>
+            <mat-card-subtitle>{{movie.release_date | date: 'MMM d, y'}}</mat-card-subtitle>
+            <ng-template [ngIf]="this._user.isUserLoggedIn()">
+                <button class="menuBtn" mat-icon-button [matMenuTriggerFor]="menu">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item *ngIf="!this._user.isPresentInFavourite(movie); else favelse"
+                        (click)="addToFavourite(movie)">
+                        <mat-icon>favorite</mat-icon>
+                        <span>Add to Favourite</span>
+                    </button>
+                    <ng-template #favelse>
+                        <button mat-menu-item (click)="removeFromFavourite(movie)">
+                            <mat-icon color="primary">favorite</mat-icon>
+                            <span>Remove from Favourite</span>
+                        </button>
+                    </ng-template>
+                    <button mat-menu-item *ngIf="!this._user.isPresentInWatchlist(movie); else watchelse"
+                        (click)="addToWatchlist(movie)">
+                        <mat-icon>bookmark</mat-icon>
+                        <span>Add to Watchlist</span>
+                    </button>
+                    <ng-template #watchelse>
+                        <button mat-menu-item (click)="removeFromWatchlist(movie)">
+                            <mat-icon color="primary">bookmark</mat-icon>
+                            <span>Remove from Watchlist</span>
+                        </button>
+                    </ng-template>
+                </mat-menu>
+            </ng-template>
+        </mat-card>
+    </div>
+</div>

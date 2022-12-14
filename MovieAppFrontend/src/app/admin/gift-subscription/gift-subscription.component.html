@@ -1,0 +1,20 @@
+<div class="container-fluid subscription-cont mobile-dialog">
+    <div class="row justify-content-start mb-3">
+        <!-- <span class="col-6 h5">Subscription</span>
+        <span style="color: rgb(162, 139, 8);" class="col-6 text-end">Credits : ${{this._user.userDetail.credits}}</span> -->
+    </div>
+    <div class="row mb-2">
+        <p class="mb-2 h6">Choose type of subscription</p>
+        
+            <mat-button-toggle-group class="d-flex flex-column flex-md-row" [formControl]="subscriptionFormControl">
+                <mat-button-toggle class="col-12 col-md-4" value="silver">Silver : $100</mat-button-toggle>
+                <mat-button-toggle class="col-12 col-md-4" value="gold">Gold : $300</mat-button-toggle>
+                <mat-button-toggle class="col-12 col-md-4" value="diamond">Diamond : $500</mat-button-toggle>
+            </mat-button-toggle-group>
+    </div>
+    <div class="row">
+        <button class="mb-2" (click)="giftSubscription()"  [disabled]="subscriptionFormControl.invalid" mat-raised-button
+            color="primary">Gift Subscription</button>
+        <button class="" mat-raised-button color="accent">Cancel</button>
+    </div>
+</div>

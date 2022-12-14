@@ -1,0 +1,19 @@
+<div class="container updateBox mobile-dialog">
+    <div class="row">
+        <div class="d-flex justify-content-center">
+                <img class="profileImg" [src]="imgSrc" alt="profile image">
+        </div>
+        <div class="text-center mt-3">
+            <mat-form-field class="col-10 col-md-6" appearance="fill">
+                <mat-label>Choose Picture</mat-label>
+                <ngx-mat-file-input class="file-input" (change)="onFileSelected($event)" #fileUpload>
+                </ngx-mat-file-input>
+            </mat-form-field>
+        </div>
+        <div class="row custom justify-content-center">
+            <button (click)="changePhoto()" class="col-12 mb-2" mat-raised-button color="primary">Update
+                photo</button>
+            <button (click)="this.dialogRef.close()" class="col-12" mat-raised-button color="warn">Close</button>
+        </div>
+    </div>
+</div>

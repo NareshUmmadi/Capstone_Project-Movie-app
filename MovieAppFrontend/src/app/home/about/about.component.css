@@ -1,0 +1,108 @@
+.body{
+    background-image: url(src\assets\about-page-bg.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+main {
+    /* border: 2px solid green; */
+    color: black;
+    text-align: center;
+    position: relative;
+    width: fit-content;
+    align-items: center;
+}
+
+.header {
+    height: 233px;
+    line-height: 233px;
+    font-family: 'Shrikhand', cursive;
+    font-size: 10em;
+    font-weight: 400;
+    display: inline-block;
+}
+
+.dead-img {
+    display: inline-block;
+    transform: scale(0.4);
+    position: absolute;
+    top: 0px;
+    right: -135px;
+}
+
+.sub-header {
+    font-size: 3em;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.about {
+    /* border: 1px solid tomato; */
+    display: inline-block;
+    width: 800px;
+    margin: 0 auto;
+    margin-top: 12px;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+.adv {
+    font-size: 2em;
+    margin-top: 50px;
+    margin-bottom: 35px;
+    font-weight: 700;
+}
+
+ol {
+    list-style: none;
+    counter-reset: my-awesome-counter;
+}
+
+ol li {
+    counter-increment: my-awesome-counter;
+}
+
+ol li::before {
+    content: counter(my-awesome-counter);
+    font-weight: bold;
+    color: #d40242;
+    font-weight: 700;
+    font-size: 4em;
+    line-height: 0.8em;
+    width: 5vw;
+    float: left;
+}
+
+li{
+    /* border: 1px solid yellow; */
+    display: block;
+    text-align: left;
+    margin: 0;
+    width: 92vw;
+    width: 800px;
+    font-size: 1.2em;
+}
+
+li p{
+    /* background-color: #d40242; */
+    width: 700px;
+    display: block;
+}
+
+#carouselExampleControls{
+    /* border: 2px solid red; */
+    width: 720px;
+    margin-left: 33px;
+    margin-top: 40px;
+}
+
+.silver{
+    background-color: silver;
+}
+.gold{
+    background-color: gold;
+}
+.diamond{
+    background-color: #b9f2ff;
+}

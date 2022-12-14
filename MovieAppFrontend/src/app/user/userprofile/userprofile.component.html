@@ -1,0 +1,192 @@
+<div class="container-fluid position-relative">
+    <div class="row background align-items-center">
+        <div class="col-12 col-md-8 d-flex flex-column flex-md-row align-items-center  justify-content-around">
+            <span class="profileimgcont">
+                <img class=" profileImg" [src]="imgSrc" alt="" srcset="">
+                <button (click)="openChangeDialog()" matTooltip="Edit Avatar" class="profileEditIcon" mat-icon-button
+                    color="accent">
+                    <mat-icon>edit</mat-icon>
+                </button>
+            </span>
+            <div class="margin-small">
+                <div class="h2 text-center text-white">{{userDetail.userName | uppercase}}</div>
+                <span class="text-muted h6">Member Since {{userDetail.joiningDate|
+                    date:'mediumDate'}}</span>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <div class="row mb-3">
+                <p style="color: #90cea1;" class="h4 text-center">Subscription</p>
+                <p class="text-center text-white"
+                    *ngIf="this.userDetail.subscription!=undefined && this._user.isSubscriptionActive(); else subscription">
+                    Expiring - {{this.userDetail.subscription.deactivationDate | date:'mediumDate'}}</p>
+                <ng-template #subscription>
+                    <p class="text-center text-white">No active subscription</p>
+                </ng-template>
+            </div>
+            <div class="row">
+                <p style="color: gold;" class="text-center h4">Credits : <span
+                        class="h5">${{this.userDetail.credits}}</span></p>
+            </div>
+        </div>
+    </div>
+    <button class="profilemenu" mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon color="accent" matTooltip="Menu">more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+        <button (click)="changePassword()" mat-menu-item>
+            <mat-icon>password</mat-icon>
+            <span>Change Password</span>
+        </button>
+        <button (click)="getSubscription()" mat-menu-item>
+            <mat-icon>subscriptions</mat-icon>
+            <span>Avail Subscription</span>
+        </button>
+        <button (click)="showTransactions()" mat-menu-item>
+            <mat-icon>receipt-long</mat-icon>
+            <span>Transactions</span>
+        </button>
+        <button (click)="deleteAccount()" mat-menu-item>
+            <mat-icon>delete-forever</mat-icon>
+            <span>Delete Account</span>
+        </button>
+    </mat-menu>
+</div>
+
+<mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+    <mat-tab checked>
+        <!-- <div class="sort my-3 me-5">
+            <button mat-raised-button [matMenuTriggerFor]="sortMenu" class="sort_btn">Sort</button>
+            <mat-menu #sortMenu="matMenu">
+                <button mat-menu-item (click)="sortWatchByName()">By Name</button>
+                <button mat-menu-item (click)="sortWatchByDate()">By Release Date</button>
+            </mat-menu>
+        </div> -->
+
+        <div class="cont d-flex flex-row justify-content-end">
+            <mat-form-field appearance="fill" class="sort mt-2 me-5">
+                <mat-label>Sort</mat-label>
+                <mat-select  data-testid="sort">
+                    <mat-option (click)="sortWatchByName()" value="By Name">By Name</mat-option>
+                    <mat-option (click)="sortWatchByDate()" value="By Date">By Date</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <ng-template mat-tab-label>
+            <mat-icon class="tab-icon">bookmark</mat-icon>
+            <span class="h5 ms-2">Watchlist</span>
+        </ng-template>
+        <div class="container-fluid">
+            <div class="container-fluid">
+                <div class="row mb-5"
+                    *ngIf="(!(userDetail.watchlist==undefined || userDetail.watchlist==null)) && userDetail.watchlist.length==0">
+                    <p class="text-center h6 my-5">No movies present in watchlist</p>
+                </div>
+                <div class="row justify-content-center mb-3" *ngFor="let movie of userDetail.watchlist">
+                    <mat-card class="example-card col-11">
+                        <div class="row">
+                            <img class="imgCardFavourite col-4"
+                                src="https://image.tmdb.org/t/p/original{{movie.poster_path}}">
+                            <div class="col-8">
+                                <div class="row card-row">
+                                    <mat-progress-spinner [diameter]="45" class="col-3 progress-spinner" color="warn"
+                                        mode="determinate" [value]="(movie.vote_average*10)">
+                                    </mat-progress-spinner>
+                                    <span class="spinner-text">{{movie.vote_average*10 | number:
+                                        '1.0-0'}}<sup>%</sup></span>
+                                    <div class="col-8">
+                                        <div (click)="openMovieDetail(movie)" class="movieTitle h6">{{movie.title}}
+                                        </div>
+                                        <p class="text-mute h6">{{movie.release_date | date:'mediumDate'}}</p>
+                                    </div>
+                                </div>
+                                <div class="row d-none d-md-inline">
+                                    <p>{{movie.overview}}</p>
+                                </div>
+                                <div class="row ps-5">
+                                    <button (click)="removeFromWatchlist(movie)" class="col-4" mat-button
+                                        color="accent">
+                                        <mat-icon>delete</mat-icon>
+                                        <span class="d-none d-md-inline">Remove</span>
+                                    </button>
+                                    <button (click)="addToFavourite(movie)"
+                                        *ngIf="!this._user.isPresentInFavourite(movie)" class="col-4" mat-button
+                                        color="accent">
+                                        <mat-icon>favorite</mat-icon>
+                                        <span class="d-none d-md-inline">Add to favourite</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon class="tab-icon">favorite</mat-icon>
+            <span class="h5 ms-2">Favourites</span>
+        </ng-template>
+        
+        <!-- <div class="sort m-3">
+            <button mat-raised-button [matMenuTriggerFor]="sortMenu">Sort</button>
+            <mat-menu #sortMenu="matMenu">
+                <button mat-menu-item (click)="sortFavByName()">By Name</button>
+                <button mat-menu-item (click)="sortFavByDate()">By Release Date</button>
+            </mat-menu>
+        </div> -->
+
+        <div class="cont d-flex flex-row justify-content-end">
+            <mat-form-field appearance="fill" class="sort mt-2 me-5">
+                <mat-label>Sort</mat-label>
+                <mat-select  data-testid="sort">
+                    <mat-option (click)="sortFavByName()" value="By Name">By Name</mat-option>
+                    <mat-option (click)="sortFavByDate()" value="By Date">By Date</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row mb-5"
+                *ngIf="!(userDetail.favourites==undefined || userDetail.favourites==null) && userDetail.favourites.length==0">
+                <p class="text-center h6 my-5">No movies present in favourites</p>
+            </div>
+            <div class="row justify-content-center mb-3" *ngFor="let movie of userDetail.favourites">
+                <mat-card class="example-card col-11">
+                    <div class="row">
+                        <img class="imgCardFavourite col-4"
+                            src="https://image.tmdb.org/t/p/original{{movie.poster_path}}">
+                        <div class="col-8">
+                            <div class="row card-row">
+                                <mat-progress-spinner [diameter]="45" class="col-3 progress-spinner" color="warn"
+                                    mode="determinate" [value]="(movie.vote_average*10)">
+                                </mat-progress-spinner>
+                                <span class="spinner-text">{{movie.vote_average*10}}<sup>%</sup></span>
+                                <div class="col-8">
+                                    <div (click)="openMovieDetail(movie)" class="movieTitle h6">{{movie.title}}</div>
+                                    <p class="text-mute h6">{{movie.release_date | date:'mediumDate'}}</p>
+                                </div>
+                            </div>
+                            <div class="row d-none d-md-inline">
+                                <p>{{movie.overview}}</p>
+                            </div>
+                            <div class="row ps-5">
+                                <button (click)="removeFromFavourite(movie)" class="col-4" mat-button color="accent">
+                                    <mat-icon>delete</mat-icon>
+                                    <span class="d-none d-md-inline">Remove</span>
+                                </button>
+                                <button (click)="addToWatchList(movie)" *ngIf="!this._user.isPresentInWatchlist(movie)"
+                                    class="col-4" mat-button color="accent">
+                                    <mat-icon>bookmark</mat-icon>
+                                    <span class="d-none d-md-inline">Add to Watchlist</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+    </mat-tab>
+</mat-tab-group>

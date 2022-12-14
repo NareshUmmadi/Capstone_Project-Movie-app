@@ -1,0 +1,32 @@
+<div class="main"><mat-card class="shipping-card">
+    <mat-card-header class="header">
+        <mat-card-title><strong>Forgot Password?</strong></mat-card-title>
+    </mat-card-header>
+
+    <div class="msg">
+        <p>Don't worry. Resetting your password is easy, just tell us the email address you registered with Netflix.</p>
+    </div>
+
+    <form class="sign-in-form" [formGroup]="forgotForm" (ngSubmit)="forgotPass()">
+        <div class="col first">
+            <mat-form-field appearance="fill">
+                <mat-label>Email Address</mat-label>
+                <input type="email" matInput formControlName="email">
+                <mat-error *ngIf="forgotForm.get('email')?.touched && forgotForm.get('email')?.hasError('required')">
+                    Email is required</mat-error>
+                <mat-error *ngIf="forgotForm.get('email')?.touched && forgotForm.get('email')?.hasError('email')">
+                    Email must be valid</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="buttons">
+            <!-- <button type="submit" mat-stroked-button color="primary" [disabled]="!forgotForm.valid">Login</button> -->
+            <button type="submit" class="btn btn-danger">Send</button>
+        </div>
+    </form>
+
+    <div class="content">
+        New to Netflix? <a class="sign-up-link" href="#">Sign up</a>
+    </div>
+
+</mat-card></div>
